@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {% if number == 0 %}
+        Quote
+    {% endif %}
+    {% if number > 0 %}
+        Quoted!
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <main class="container p-5">
+        {% if number == 0 %}
+        <form action="/quote" method="post">
+            <div class="form-group">
+                <input autocomplete="off" autofocus="" class="form-control" name="symbol" placeholder="Symbol" type="text">
+            </div>
+            <button id="submit" class="btn btn-primary" type="submit">Quote</button>
+        </form>
+        {% endif %}
+
+        {% if number > 0 %}
+            <p>A share of {{ company }} ({{ symbol }}) costs: {{ price }}</p>
+        {% endif %}
+
+    </main>
+{% endblock %}

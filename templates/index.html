@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search for a Book
+{% endblock %}
+
+
+{% block main %}
+    <main class="container p-5">
+        
+        <h2>Search for a Book!</h2>
+        <form action="/" method="post">
+            <div class="form-group">
+                <input autocomplete="off" autofocus="" class="form-control" name="search" placeholder="Enter ISBN / Title / Author / literally anything related to a book" type="text">
+            </div>
+            <button id="submit" class="btn btn-primary" type="submit">Search!</button>
+        </form>   
+        {% if number == 1 %}
+            <br style=“line-height:3;”>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ISBN</th>
+                        <th>Book Name</th>
+                        <th>Author</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td><a href = "{{ url_for('search',row_id=row[0]) }}">{{ row[0] }}</a></td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+        {% if number == 0 %}
+            <br style=“line-height:3;”>
+            <h5>Sorry, No match Found!</h5>
+            <p>Please try again!!</p>
+        {% endif %}
+    </main>
+{% endblock %}

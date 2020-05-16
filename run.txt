@@ -1,0 +1,8 @@
+$env:FLASK_APP="application.py"
+$env:DATABASE_URL="postgres://elreebhjmywslf:e5ba7e288fce559b1c9ca5754f13b358b569e2fb4f9e999c415811301a35727f@ec2-54-152-175-141.compute-1.amazonaws.com:5432/dalhnfqvclnfc0"
+$env:FLASK_DEBUG="1"
+
+
+
+"goodreads api key: LviNQkJKSOhksbS5fy4ezQ"
+"secret: zNABoE7369PDnSZzRSr2iLmCDrcWqz5fHyLDcPESqM"
