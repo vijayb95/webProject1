@@ -5,4 +5,5 @@ SQLAlchemy
 werkzeug==0.16.0
 hashlib
 re
-
+pd
+panda

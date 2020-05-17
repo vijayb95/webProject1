@@ -35,29 +35,23 @@ def login_required(f):
     return decorated_function
 
 
-def lookup(symbol):
+def lookup(isbn):
     """Look up quote for symbol."""
 
     # Contact API
     try:
-        api_key = os.environ.get("API_KEY")
-        response = requests.get(f"https://cloud-sse.iexapis.com/stable/stock/{urllib.parse.quote_plus(symbol)}/quote?token={api_key}")
+        api_key = 'LviNQkJKSOhksbS5fy4ezQ'
+        response = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": api_key, "isbns": isbn})
         response.raise_for_status()
     except requests.RequestException:
         return None
 
     # Parse response
     try:
-        quote = response.json()
-        return {
-            "name": quote["companyName"],
-            "price": float(quote["latestPrice"]),
-            "symbol": quote["symbol"]
-        }
+        book = response.json()
+        book = book['books'][0]
+        return book
     except (KeyError, TypeError, ValueError):
         return None
 
 
-def usd(value):
-    """Format value as USD."""
-    return f"${value:,.2f}"

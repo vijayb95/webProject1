@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search for a Book
+{% endblock %}
+
+
+{% block main %}
+    <main style="text-align: left;" class="container p-5">
+        
+        <h1>Details and Reviews:</h1>
+        <div style="padding-left: 6ch;">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ISBN: {{ rows[1] }}</li>
+                <li class="list-group-item">Title of the book: {{ rows[2] }}</li>
+                <li class="list-group-item">Author: {{ rows[3] }}</li>
+                <li class="list-group-item">Launch Year: {{ rows[4] }}</li>
+            </ul>
+            {% if grow[0] == 1%}
+                <h5>Details from Goodreads: </h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Average Rating: {{ grow[1] }}</li>
+                    <li class="list-group-item">Total number of review: {{ grow[2] }}</li>
+                </ul>
+            {% endif %}
+        </div>
+        <br>
+        {% if number == 1 %}
+            <!-- <br style=“line-height:3;”>
+            <h6>Sorry, No match Found!</h6>
+            <p>Please try again!!</p> -->
+            <h5>Your Review: </h5>
+            <div style="padding-left: 6ch;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Rating: {{ row[1] }}</li>
+                    <li class="list-group-item">Comments: {{ row[0] }}</li>
+                </ul>
+            </div>
+            
+        {% endif %}
+        {% if number == 0 %}
+            <form action="/book/{{ rows[0] }}" method="post">
+                <h5>Enter your review and ratings below:</h5>
+                <div style="padding-left: 6ch;">
+                    <div class="form-group">
+                        <label class="radio-inline"><input value="1" type="radio" name="rating">1 star </label>
+                        <label class="radio-inline"><input value="2" type="radio" name="rating">2 star </label>
+                        <label class="radio-inline"><input value="3" type="radio" name="rating">3 star </label>
+                        <label class="radio-inline"><input value="4" type="radio" name="rating">4 star </label>
+                        <label class="radio-inline"><input value="5" type="radio" name="rating">5 star </label>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="comment">Review comments:</label><br>
+                            <textarea class="form-control" rows="5" name="review" style="width: 100%;" placeholder="Type your comments here" id="comment"></textarea>
+                        </div>
+                    </div>
+                    <button id="submit" class="btn btn-primary" type="submit">Submit!</button>
+                </div>
+            </form>  
+        {% endif %}
+    </main>
+{% endblock %}

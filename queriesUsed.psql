@@ -30,6 +30,23 @@ CREATE TABLE vendor_parts (
                     ON UPDATE CASCADE ON DELETE CASCADE
         )
 
+drop table reviews;
+CREATE TABLE reviews (
+    user_id INTEGER REFERENCES users(id),
+    book_id INTEGER REFERENCES books(book_id),
+    reviews TEXT,
+    ratings INTEGER
+);
+
+CREATE TABLE so_items (
+  item_id INTEGER NOT NULL,	
+  so_id INTEGER REFERENCES so_headers(id),
+  product_id INTEGER,
+  qty INTEGER,
+  net_price numeric,
+  PRIMARY KEY (item_id,so_id)
+);
+
 drop table books;
 
 CREATE TABLE books (
@@ -41,3 +58,8 @@ CREATE TABLE books (
 )
 
 SELECT ISBN FROM books WHERE (ISBN LIKE '%0380795272%')
+
+db.execute("INSERT INTO reviews (:user_id, :book_id, :reviews, :ratings)"{"user_id":session["user_id"],"book_id": rows_id,"reviews":review,"ratings":rating})
+
+
+db.execute("INSERT INTO reviews (user_id, book_id, reviews, ratings) VALUES(:user_id, :book_id, :reviews, :ratings)")
